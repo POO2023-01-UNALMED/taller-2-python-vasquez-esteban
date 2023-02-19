@@ -19,17 +19,16 @@ class Auto:
         return counter
 
     def verificarIntegridad(self):
-        if self.motor.registro == self.registro:
+        if self.registro != self.motor.registro:
+            return "Las piezas no son originales"
+        else:
             for asiento in self.asientos:
-                if type(Asiento) == Asiento:
-                    if asiento.registro != self.registro:
-                        return "Las piezas no son originales"
-                    else:
-                        continue
-                else:
+                if type(asiento) != Asiento:
                     continue
-            return "Auto original"
-        return "Las piezas no son originales"
+                else:
+                    if asiento.registro != self.motor.registro:
+                        return "Las piezas no son originales"
+                    return "Auto original"
 
 
 class Asiento:
@@ -65,3 +64,14 @@ class Motor:
             self.tipo = "electrico"
         elif tipo == "gasolina":
             self.tipo = "gasolina"
+
+
+if __name__ == "__main__":
+    a1 = Auto("model 3", 33000, [Asiento("blanco", 5000, 32), None, None, Asiento("blanco", 5000, 32), None],
+              "tesla", Motor(4, "electrico", 32), 32)
+    a2 = Auto("model 3", 33000, [Asiento("blanco", 5000, 40), None, None, Asiento("blanco", 5000, 32), None],
+              "tesla", Motor(4, "electrico", 32), 32)
+
+    print(a1.verificarIntegridad())
+    print(a2.verificarIntegridad())
+
