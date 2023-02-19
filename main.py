@@ -11,7 +11,12 @@ class Auto:
         self.registro = registro
 
     def cantidadAsientos(self):
-        return len(self.asientos)
+        counter = 0
+
+        for asiento in self.asientos:
+            if type(asiento) == Asiento:
+                counter += 1
+        return counter
 
     def verificarIntegridad(self):
         if self.motor.registro == self.registro:
@@ -57,3 +62,4 @@ class Motor:
             self.tipo = "electrico"
         elif tipo == "gasolina":
             self.tipo = "gasolina"
+
